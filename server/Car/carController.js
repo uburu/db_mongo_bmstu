@@ -17,22 +17,22 @@ router.post('/', (request, response) => {
             model: request.body.model,
             other: request.body.other,
             plate: request.body.plate,
-            owner: request.body.owner // передадим _id владельца чтобы создать связь (не обязательно, например: машина не имеет владельца)
+            car: request.body.car // передадим _id владельца чтобы создать связь (не обязательно, например: машина не имеет владельца)
         }, 
-        (err, owner) => {
+        (err, car) => {
             if (err) return response.status(500).send("There was a problem adding the information to the database.");
-            response.status(200).send(owner);
+            response.status(200).send(car);
         });
 });
 
 
 // вывод всех автомобилей
 router.get('/', (request, response) => {
-    carModel.carSchema.find({}).populate('owner').lean().exec((err, owners) => {
+    carModel.carSchema.find({}).populate('car').lean().exec((err, owners) => {
         /* 
         # ВАЖНО
         тут происходит ещё одна интересная вещь:
-            populate('owner') - подставляет в ответ вместо id запись о владельце
+            populate('car') - подставляет в ответ вместо id запись о владельце
         */
         if (err) return response.status(500).send("There was a problem finding the owners.");
         response.status(200).send(owners);
@@ -46,10 +46,10 @@ router.get('/:manufacturer', (request, response) => {
         {
             'manufacturer': request.params.manufacturer
         },
-        ).populate('owner').lean().exec((err, owner) => {
-        if (err) return response.status(500).send("There was a problem finding the owner.");
-        if (!owner) return response.status(404).send("No owner found.");
-        response.status(200).send(owner);
+        ).populate('car').lean().exec((err, car) => {
+        if (err) return response.status(500).send("There was a problem finding the car.");
+        if (!car) return response.status(404).send("No car found.");
+        response.status(200).send(car);
     });
 });
 
@@ -61,10 +61,10 @@ router.get('/:manufacturer/:model', (request, response) => {
             'manufacturer': request.params.manufacturer,
             'model': request.params.model
         },
-        ).populate('owner').lean().exec((err, owner) => {
-        if (err) return response.status(500).send("There was a problem finding the owner.");
-        if (!owner) return response.status(404).send("No owner found.");
-        response.status(200).send(owner);
+        ).populate('car').lean().exec((err, car) => {
+        if (err) return response.status(500).send("There was a problem finding the car.");
+        if (!car) return response.status(404).send("No car found.");
+        response.status(200).send(car);
     });
 });
 
@@ -77,10 +77,10 @@ router.get('/:manufacturer/:model/:plate', (request, response) => {
             'model': request.params.model,
             'plate': request.params.plate
         },
-        ).lean().exec((err, owner) => {
-        if (err) return response.status(500).send("There was a problem finding the owner.");
-        if (!owner) return response.status(404).send("No owner found.");
-        response.status(200).send(owner);
+        ).lean().exec((err, car) => {
+        if (err) return response.status(500).send("There was a problem finding the car.");
+        if (!car) return response.status(404).send("No car found.");
+        response.status(200).send(car);
     });
 });
 

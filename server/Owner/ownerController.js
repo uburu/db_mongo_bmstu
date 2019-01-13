@@ -59,8 +59,8 @@ router.get('/:last/:first', (request, response) => {
         {
             'name.last': request.params.last,
             'name.first': request.params.first
-        },
-        'name other').lean().exec((err, owner) => {
+        }
+        ).lean().exec((err, owner) => {
         if (err) return response.status(500).send("There was a problem finding the owner.");
         if (!owner) return response.status(404).send("No owner found.");
         response.status(200).send(owner);
