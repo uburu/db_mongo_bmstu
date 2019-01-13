@@ -208,12 +208,12 @@ GET: 127.0.0.1:8000/cars/
 
 Запрос на всех авто марки Mercedes-Benz
 ```json
-GET: 127.0.0.1:8000/cars/Mercedes-Benz/300SL Gullwing/b123cd777
+GET: 127.0.0.1:8000/cars/Mercedes-Benz
 ```
 
 Запрос на всех авто марки Mercedes-Benz и модели 300SL Gullwing 
 ```json
-GET: 127.0.0.1:8000/cars/Mercedes-Benz/300SL Gullwing/b123cd777
+GET: 127.0.0.1:8000/cars/Mercedes-Benz/300SL Gullwing
 ```
 
 Запрос на всех авто марки Mercedes-Benz, модели 300SL Gullwing, и номерным знаком b123cd777
